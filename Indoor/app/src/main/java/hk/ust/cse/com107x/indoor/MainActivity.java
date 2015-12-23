@@ -49,9 +49,12 @@ public class MainActivity extends Activity implements View.OnClickListener {
         EditText ycor = (EditText) findViewById(R.id.ycor);
         EditText zcor = (EditText) findViewById(R.id.zcor);
         //String x = xcor.getText().toString();
-        Double X = Double.parseDouble(xcor.getText().toString());
-        Double Y = Double.parseDouble(ycor.getText().toString());
-        Double Z = Double.parseDouble(zcor.getText().toString());
+        int X = Integer.parseInt(xcor.getText().toString());
+        //Double X = Double.parseDouble(xcor.getText().toString());
+        int Y = Integer.parseInt(ycor.getText().toString());
+        int Z = Integer.parseInt(zcor.getText().toString());
+//        Double Y = Double.parseDouble(ycor.getText().toString());
+//        Double Z = Double.parseDouble(zcor.getText().toString());
         switch(v.getId())
         {
             case R.id.button:

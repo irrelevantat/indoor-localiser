@@ -48,7 +48,8 @@
             android:text="Ok"
             android:id="@+id/button"
             android:layout_gravity="center_horizontal"
-            android:layout_weight="0.07" />
+            android:layout_weight="0.07"
+            android:background="#5d70ff" />
 
     </LinearLayout>
 
