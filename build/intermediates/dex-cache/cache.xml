@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/home/shubham-kapoor/android-indoor-localisation/Indoor/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/libs/internal_impl-22.2.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
+        <dex dex="/home/shubham-kapoor/android-indoor-localisation/Indoor/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.1-f8046f85a077177d42d9a69239508c64715e75b4.jar" />
+    </item>
+    <item
+        jar="/home/shubham-kapoor/android-indoor-localisation/Indoor/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="f8efd0096475e0daf054267b61544e10dc776503">
+        <dex dex="/home/shubham-kapoor/android-indoor-localisation/Indoor/app/build/intermediates/pre-dexed/debug/classes-b8fa0e8d400269c3172b3a3bcf57aad1cecd4cd2.jar" />
+    </item>
+    <item
+        jar="/home/shubham-kapoor/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/22.2.1/support-annotations-22.2.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="61a0ff5c29295ec56d7e0bd3d25d95dbf71b4b2b">
+        <dex dex="/home/shubham-kapoor/android-indoor-localisation/Indoor/app/build/intermediates/pre-dexed/debug/support-annotations-22.2.1-40edd11aa15b5c22617c90ae43c87b853ac3c177.jar" />
+    </item>
+    <item
+        jar="/home/shubham-kapoor/android-indoor-localisation/Indoor/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="4486e953d1f35f8ccab098b1dd67146366d5f731">
+        <dex dex="/home/shubham-kapoor/android-indoor-localisation/Indoor/app/build/intermediates/pre-dexed/debug/classes-6e1d7a94613230f63c6d564f598e290a318bc849.jar" />
+    </item>
+
+</items>

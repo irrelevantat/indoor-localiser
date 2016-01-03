@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="actionbar_text">#fff</color>
+    <color name="material_blue_a100">#82b1ff</color>
+    <color name="material_blue_50">#E3F2FD</color>
+    <color name="material_blue_300">#64B5F6</color>
+    <color name="material_blue_500">#2196f3</color>
+    <color name="material_blue_700">#1976d2</color>
+    <color name="drawer_selector">#33b5e5</color>
+    <color name="drawer_text">#000</color>
+    <color name="drawer_background">#f7f7f7</color>
+    <color name="drawer_divider">#c7c7c7</color>
+    <color name="add_place_circle">#bb2196f3</color>
+    <color name="place_circle">#662196f3</color>
+    <color name="panel_border">#1e000000</color>
+    <color name="nav_drawer_menu_text_color">#de000000</color>
+</resources>
