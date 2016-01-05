@@ -3,6 +3,7 @@ package localiser;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.wifi.WifiManager;
 
 import java.io.IOException;
@@ -38,6 +39,7 @@ public class LocaliserController extends BroadcastReceiver
     private final FingerprintDatabase db_finger;
     private final POIDatabase db_poi;
     private final WifiManager wifiManager;
+    private final Context c;
 
     private Callback callback;
 
@@ -45,6 +47,7 @@ public class LocaliserController extends BroadcastReceiver
 
         this.db_finger = new FingerprintDatabase(c);
         this.db_poi = new POIDatabase(c);
+        this.c = c;
 
         this.wifiManager = (WifiManager) c.getSystemService(Context.WIFI_SERVICE);
 
@@ -54,16 +57,22 @@ public class LocaliserController extends BroadcastReceiver
             throw new NoWIFIException("WIFI is not enabled");
         }
 
-        System.out.println(wifiManager.getScanResults());
         this.algorithm = algorithm;
     }
 
     public void registerForLocationUpdates(final Callback callback)
     {
+
         this.callbacks.add(callback);
+        if(this.callbacks.size()==1)
+            c.registerReceiver(this,new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
+
+
     }
     public void unregisterForLocationUpdates(final Callback callback){
         this.callbacks.remove(callback);
+        if(this.callbacks.size()==0)
+            c.unregisterReceiver(this);
     }
 
     private void locationUpdated(Coordinates c) {
@@ -75,6 +84,8 @@ public class LocaliserController extends BroadcastReceiver
 
     @Override
     public void onReceive(Context context, Intent intent) {
+
         this.locationUpdated(this.algorithm.getLocation(Fingerprint.fromScanResult(wifiManager.getScanResults()), db_finger));
+        wifiManager.startScan();
     }
 }

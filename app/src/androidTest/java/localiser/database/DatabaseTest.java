@@ -67,9 +67,9 @@ public class DatabaseTest extends ActivityInstrumentationTestCase2<MainActivity>
     {
         PointOfInterest poi = PointOfInterest.fromDBString("Emergency Exit;45.0;34.0;1.0");
         assertEquals(poi.name, "Emergency Exit");
-        assertEquals(poi.coordinates.x,45.0);
-        assertEquals(poi.coordinates.y,34.0);
-        assertEquals(poi.coordinates.z,1.0);
+        assertEquals((int)poi.coordinates.x,(int)45.0);
+        assertEquals((int)poi.coordinates.y,(int)34.0);
+        assertEquals((int)poi.coordinates.z,(int)1.0);
     }
     public void testPOIDatabaseConstruction() throws IOException {
 

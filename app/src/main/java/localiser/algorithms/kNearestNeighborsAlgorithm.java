@@ -35,10 +35,10 @@ public class kNearestNeighborsAlgorithm extends NearestNeighborAlgorithm {
         //get K closest points
         for(int i = 0; i<K && i<difference.size(); i++)
         {
-            int indexOfMax = difference.indexOf(Collections.max(difference));
+            int indexOfMax = difference.indexOf(Collections.min(difference));
             closestPoints.add(db.get(indexOfMax));
             closestPointsDifferences.add(difference.get(indexOfMax));
-            difference.set(indexOfMax, new Double(0));
+            difference.set(indexOfMax, new Double(Double.MAX_VALUE));
         }
 
         double x = 0,y = 0,z = 0;
@@ -56,6 +56,9 @@ public class kNearestNeighborsAlgorithm extends NearestNeighborAlgorithm {
         y /= sumWeights;
         z /= sumWeights;
 
+        if (Double.isNaN(x) || Double.isNaN(y) || Double.isNaN(z)) {
+            return null;
+        }
 
         return new Coordinates((int)x,(int)y,(int)z);
 

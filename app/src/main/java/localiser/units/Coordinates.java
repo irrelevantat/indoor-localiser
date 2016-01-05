@@ -14,6 +14,11 @@ public class Coordinates
         this.z = z;
     }
 
+    @Override
+    public String toString() {
+        return String.format("<%4.0f, %4.0f, %4.0f>",x,y,z);
+    }
+
     public double distance(Coordinates c)
     {
         return Math.sqrt(Math.pow(c.x-this.x,2) + Math.pow(c.y-this.y,2) + Math.pow(c.z-this.z,2));

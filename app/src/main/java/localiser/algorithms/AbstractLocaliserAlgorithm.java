@@ -12,7 +12,7 @@ import localiser.database.Fingerprint;
 
 public abstract class AbstractLocaliserAlgorithm {
 
-    protected final InterfaceLocaliserComparator comp;
+    public final InterfaceLocaliserComparator comp;
 
     public AbstractLocaliserAlgorithm(InterfaceLocaliserComparator comp)
     {

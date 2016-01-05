@@ -9,7 +9,11 @@ import java.util.concurrent.CountDownLatch;
 
 import hk.ust.cse.com107x.indoor.MainActivity;
 import localiser.algorithms.AbstractLocaliserAlgorithm;
+import localiser.algorithms.NearestNeighborAlgorithm;
+import localiser.algorithms.comparators.CosineComparator;
+import localiser.algorithms.comparators.InterfaceLocaliserComparator;
 import localiser.algorithms.comparators.SimpleComporator;
+import localiser.algorithms.kNearestNeighborsAlgorithm;
 import localiser.database.FingerprintDatabase;
 import localiser.database.Fingerprint;
 import localiser.units.Coordinates;
@@ -34,10 +38,31 @@ public class LocaliserControllerTest extends ActivityInstrumentationTestCase2<Ma
     }
 
 
-    public void testLocationUpdates() throws LocaliserController.NoWIFIException, InterruptedException, IOException {
+    private void helperTester(final AbstractLocaliserAlgorithm algo, int kTimes) throws InterruptedException, LocaliserController.NoWIFIException, IOException {
+        final CountDownLatch semaphore = new CountDownLatch(kTimes);
 
-        //need to receive at least 2 updates
-        final CountDownLatch semaphore = new CountDownLatch(2);
+        LocaliserController testController = new LocaliserController(algo, solo.getCurrentActivity());
+        LocaliserController.Callback cb = new LocaliserController.Callback() {
+            @Override
+            public void locationUpdated(Coordinates c) {
+                //it's enough if we receive some result
+                System.out.println("Updated coordinates ("
+                        + algo.getClass().getSimpleName()
+                        + ", "
+                        + algo.comp.getClass().getSimpleName()
+                        + "): "
+                        + c);
+
+                assertNotNull(c);
+                semaphore.countDown();
+            }
+        };
+        testController.registerForLocationUpdates(cb);
+        semaphore.await();
+        testController.unregisterForLocationUpdates(cb);
+    }
+
+    public void testLocating_Abstract() throws LocaliserController.NoWIFIException, InterruptedException, IOException {
 
         AbstractLocaliserAlgorithm testAlgo = new AbstractLocaliserAlgorithm(new SimpleComporator()) {
             @Override
@@ -45,22 +70,32 @@ public class LocaliserControllerTest extends ActivityInstrumentationTestCase2<Ma
                 return new Coordinates(0,0,0);
             }
         };
+        helperTester(testAlgo, 2);
 
-        LocaliserController testController = new LocaliserController(testAlgo,solo.getCurrentActivity());
-        testController.registerForLocationUpdates(new LocaliserController.Callback() {
-            @Override
-            public void locationUpdated(Coordinates c) {
-                assertEquals(c.x, 0);
-                assertEquals(c.y, 0);
-                assertEquals(c.z, 0);
-                semaphore.countDown();
-            }
-        });
-
-        semaphore.await();
 
     }
 
+
+    public void testLocating_kNearest_cosine() throws LocaliserController.NoWIFIException, IOException, InterruptedException {
+
+        AbstractLocaliserAlgorithm algo = new kNearestNeighborsAlgorithm(new CosineComparator());
+        helperTester(algo, 2);
+    }
+    public void testLocating_kNearest_simple() throws LocaliserController.NoWIFIException, IOException, InterruptedException {
+
+        AbstractLocaliserAlgorithm algo = new kNearestNeighborsAlgorithm(new SimpleComporator());
+        helperTester(algo, 2);
+    }
+    public void testLocating_Nearest_cosine() throws LocaliserController.NoWIFIException, IOException, InterruptedException {
+
+        AbstractLocaliserAlgorithm algo = new NearestNeighborAlgorithm(new CosineComparator());
+        helperTester(algo, 2);
+    }
+    public void testLocating_Nearest_simple() throws LocaliserController.NoWIFIException, IOException, InterruptedException {
+
+        AbstractLocaliserAlgorithm algo = new NearestNeighborAlgorithm(new SimpleComporator());
+        helperTester(algo, 2);
+    }
 
 
 
