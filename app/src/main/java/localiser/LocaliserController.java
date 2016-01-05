@@ -1,49 +1,80 @@
 package localiser;
 
-import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.net.wifi.WifiManager;
+
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
+
+import localiser.algorithms.AbstractLocaliserAlgorithm;
+import localiser.database.FingerprintDatabase;
+import localiser.database.Fingerprint;
+import localiser.database.POIDatabase;
+import localiser.units.Coordinates;
+import localiser.units.PointOfInterest;
 
 /**
  * Created by sebastian on 26/12/15.
  */
-public class LocaliserController {
+public class LocaliserController extends BroadcastReceiver
+{
 
-    public class LocaliserException extends Exception
-    {
-
-    }
+    public class NoWIFIException extends Exception{
+        public NoWIFIException(String exc){
+            super(exc);
+        }
+    };
 
     public interface Callback{
-        public void locationUpdated(int x, int y, int z);
-        public void locationFail(LocaliserException exc);
+        public void locationUpdated(Coordinates c);
     }
 
 
-    private Timer timer;
+    private final AbstractLocaliserAlgorithm algorithm;
+    private final Set<Callback> callbacks = new HashSet<>();
+    private final FingerprintDatabase db_finger;
+    private final POIDatabase db_poi;
+    private final WifiManager wifiManager;
 
-    public void registerForLocationUpdates(final Callback callback, final int interval)
+    private Callback callback;
+
+    public LocaliserController(AbstractLocaliserAlgorithm algorithm, Context c) throws NoWIFIException, IOException {
+
+        this.db_finger = new FingerprintDatabase(c);
+        this.db_poi = new POIDatabase(c);
+
+        this.wifiManager = (WifiManager) c.getSystemService(Context.WIFI_SERVICE);
+
+        //check if WIFI is enabled and whether scanning launched
+        if(!wifiManager.isWifiEnabled() || !wifiManager.startScan())
+        {
+            throw new NoWIFIException("WIFI is not enabled");
+        }
+
+        System.out.println(wifiManager.getScanResults());
+        this.algorithm = algorithm;
+    }
+
+    public void registerForLocationUpdates(final Callback callback)
     {
-        final TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-
-                //call algorithm and pass on to callback
-                //temporarily return random values
-                Random r = new Random();
-                callback.locationUpdated(r.nextInt(2000), r.nextInt(2000), r.nextInt(2000));
-            }
-        };
-        this.timer = new Timer();
-        this.timer.schedule(task, 0, interval);
-
-
+        this.callbacks.add(callback);
     }
-    public void unregisterForLocationUpdates(){
-        this.timer.cancel();
-        this.timer = null;
+    public void unregisterForLocationUpdates(final Callback callback){
+        this.callbacks.remove(callback);
     }
 
+    private void locationUpdated(Coordinates c) {
+        //get new location updates
+        for (Callback ca : this.callbacks) {
+            ca.locationUpdated(c);
+        }
+    }
+
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        this.locationUpdated(this.algorithm.getLocation(Fingerprint.fromScanResult(wifiManager.getScanResults()), db_finger));
+    }
 }
