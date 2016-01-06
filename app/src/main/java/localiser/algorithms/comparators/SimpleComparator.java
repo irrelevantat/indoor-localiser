@@ -5,7 +5,7 @@ import localiser.database.Fingerprint;
 /**
  * Created by sebastian on 05/01/16.
  */
-public class SimpleComporator implements InterfaceLocaliserComparator{
+public class SimpleComparator implements InterfaceLocaliserComparator{
 
     public double similarity(Fingerprint p1, Fingerprint p2)
     {

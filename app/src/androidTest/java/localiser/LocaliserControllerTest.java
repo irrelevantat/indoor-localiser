@@ -11,8 +11,7 @@ import hk.ust.cse.com107x.indoor.MainActivity;
 import localiser.algorithms.AbstractLocaliserAlgorithm;
 import localiser.algorithms.NearestNeighborAlgorithm;
 import localiser.algorithms.comparators.CosineComparator;
-import localiser.algorithms.comparators.InterfaceLocaliserComparator;
-import localiser.algorithms.comparators.SimpleComporator;
+import localiser.algorithms.comparators.SimpleComparator;
 import localiser.algorithms.kNearestNeighborsAlgorithm;
 import localiser.database.FingerprintDatabase;
 import localiser.database.Fingerprint;
@@ -64,7 +63,7 @@ public class LocaliserControllerTest extends ActivityInstrumentationTestCase2<Ma
 
     public void testLocating_Abstract() throws LocaliserController.NoWIFIException, InterruptedException, IOException {
 
-        AbstractLocaliserAlgorithm testAlgo = new AbstractLocaliserAlgorithm(new SimpleComporator()) {
+        AbstractLocaliserAlgorithm testAlgo = new AbstractLocaliserAlgorithm(new SimpleComparator()) {
             @Override
             public Coordinates getLocation(Fingerprint p, FingerprintDatabase db) {
                 return new Coordinates(0,0,0);
@@ -83,7 +82,7 @@ public class LocaliserControllerTest extends ActivityInstrumentationTestCase2<Ma
     }
     public void testLocating_kNearest_simple() throws LocaliserController.NoWIFIException, IOException, InterruptedException {
 
-        AbstractLocaliserAlgorithm algo = new kNearestNeighborsAlgorithm(new SimpleComporator());
+        AbstractLocaliserAlgorithm algo = new kNearestNeighborsAlgorithm(new SimpleComparator());
         helperTester(algo, 2);
     }
     public void testLocating_Nearest_cosine() throws LocaliserController.NoWIFIException, IOException, InterruptedException {
@@ -93,10 +92,24 @@ public class LocaliserControllerTest extends ActivityInstrumentationTestCase2<Ma
     }
     public void testLocating_Nearest_simple() throws LocaliserController.NoWIFIException, IOException, InterruptedException {
 
-        AbstractLocaliserAlgorithm algo = new NearestNeighborAlgorithm(new SimpleComporator());
+        AbstractLocaliserAlgorithm algo = new NearestNeighborAlgorithm(new SimpleComparator());
         helperTester(algo, 2);
     }
 
+    public void testDocumentation()
+    {
+
+
+
+
+
+
+
+
+
+
+
+    }
 
 
 }
