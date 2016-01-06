@@ -32,32 +32,4 @@ public class POIDatabase  extends AbstractDatabase<PointOfInterest> {
     }
 
 
-    public List<Tuple<Double,PointOfInterest>> getClosestPOI(Coordinates c)
-    {
-        List<Tuple<Double,PointOfInterest>> closest = new LinkedList<>();
-        for(PointOfInterest poi: this)
-        {
-            closest.add(new Tuple<Double, PointOfInterest>(c.distance(poi.coordinates),poi));
-        }
-
-        //sort by distance
-        Collections.sort(closest, new Comparator<Tuple<Double, PointOfInterest>>() {
-            @Override
-            public int compare(Tuple<Double, PointOfInterest> lhs, Tuple<Double, PointOfInterest> rhs) {
-                return lhs.first.compareTo(rhs.first);
-            }
-        });
-
-        return closest;
-    }
-    public List<Tuple<Double,PointOfInterest>> getClosestPOI(Coordinates c, int num)
-    {
-        List<Tuple<Double,PointOfInterest>> closest = this.getClosestPOI(c);
-
-        //trim N
-        if(closest.size()>num)
-            return closest.subList(0,num);
-        else
-            return closest;
-    }
 }

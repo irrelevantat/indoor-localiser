@@ -7,7 +7,11 @@ import android.content.IntentFilter;
 import android.net.wifi.WifiManager;
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 import localiser.algorithms.AbstractLocaliserAlgorithm;
@@ -16,6 +20,7 @@ import localiser.database.Fingerprint;
 import localiser.database.POIDatabase;
 import localiser.units.Coordinates;
 import localiser.units.PointOfInterest;
+import localiser.units.Tuple;
 
 /**
  * Created by sebastian on 26/12/15.
@@ -80,6 +85,35 @@ public class LocaliserController extends BroadcastReceiver
         for (Callback ca : this.callbacks) {
             ca.locationUpdated(c);
         }
+    }
+
+    public List<Tuple<Double,PointOfInterest>> getClosestPOI(Coordinates c)
+    {
+        List<Tuple<Double,PointOfInterest>> closest = new LinkedList<>();
+        for(PointOfInterest poi: db_poi)
+        {
+            closest.add(new Tuple<Double, PointOfInterest>(c.distance(poi.coordinates),poi));
+        }
+
+        //sort by distance
+        Collections.sort(closest, new Comparator<Tuple<Double, PointOfInterest>>() {
+            @Override
+            public int compare(Tuple<Double, PointOfInterest> lhs, Tuple<Double, PointOfInterest> rhs) {
+                return lhs.first.compareTo(rhs.first);
+            }
+        });
+
+        return closest;
+    }
+    public List<Tuple<Double,PointOfInterest>> getClosestPOI(Coordinates c, int num)
+    {
+        List<Tuple<Double,PointOfInterest>> closest = this.getClosestPOI(c);
+
+        //trim N
+        if(closest.size()>num)
+            return closest.subList(0,num);
+        else
+            return closest;
     }
 
     @Override
