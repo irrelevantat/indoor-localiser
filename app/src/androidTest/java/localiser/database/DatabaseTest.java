@@ -9,6 +9,7 @@ import java.util.List;
 
 import hk.ust.cse.com107x.indoor.MainActivity;
 import hk.ust.cse.com107x.indoor.R;
+import localiser.LocaliserController;
 import localiser.units.Coordinates;
 import localiser.units.PointOfInterest;
 import localiser.units.Tuple;
@@ -83,11 +84,12 @@ public class DatabaseTest extends ActivityInstrumentationTestCase2<MainActivity>
             assertNotNull(poi.coordinates);
         }
     }
-    public void testNearestPOI() throws IOException {
-        POIDatabase db = new POIDatabase(solo.getCurrentActivity(), R.raw.test_poi);
+    public void testNearestPOI() throws IOException, LocaliserController.NoWIFIException {
+
+        LocaliserController lc = new LocaliserController(null, solo.getCurrentActivity());
 
         Coordinates c = new Coordinates(45,34,1);
-        List<Tuple<Double,PointOfInterest>> list = db.getClosestPOI(c,10);
+        List<Tuple<Double,PointOfInterest>> list = lc.getClosestPOI(c,10);
 
         assertTrue(list.size()>0 && list.size()<=10);
 
