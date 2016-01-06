@@ -22,23 +22,25 @@ public class kNearestNeighborsAlgorithm extends NearestNeighborAlgorithm {
     public Coordinates getLocation(Fingerprint p, FingerprintDatabase db){
 
 
-        ArrayList<Double> difference = new ArrayList<>();
+        ArrayList<Double> similiarity = new ArrayList<>();
 
         ArrayList<Fingerprint> closestPoints = new ArrayList<>();
-        ArrayList<Double> closestPointsDifferences = new ArrayList<>();
+        ArrayList<Double> closestPointsSimiliarity = new ArrayList<>();
 
         //calculate differences for all points
         for(int i = 0; i<db.size(); i++)
         {
-            difference.add(new Double(comp.similarity(p, db.get(i))));
+            similiarity.add(new Double(comp.similarity(p, db.get(i))));
         }
         //get K closest points
-        for(int i = 0; i<K && i<difference.size(); i++)
+        for(int i = 0; i<K && i<similiarity.size(); i++)
         {
-            int indexOfMax = difference.indexOf(Collections.min(difference));
+            int indexOfMax = similiarity.indexOf(Collections.max(similiarity));
             closestPoints.add(db.get(indexOfMax));
-            closestPointsDifferences.add(difference.get(indexOfMax));
-            difference.set(indexOfMax, new Double(Double.MAX_VALUE));
+            closestPointsSimiliarity.add(similiarity.get(indexOfMax));
+
+            similiarity.set(indexOfMax, new Double(Double.MIN_VALUE));
+
         }
 
         double x = 0,y = 0,z = 0;
@@ -47,10 +49,11 @@ public class kNearestNeighborsAlgorithm extends NearestNeighborAlgorithm {
         //mix those closest together
         for(int i = 0; i<closestPoints.size(); i++)
         {
-            x += closestPoints.get(i).getCoordinates().x * closestPointsDifferences.get(i);
-            y += closestPoints.get(i).getCoordinates().y * closestPointsDifferences.get(i);
-            z += closestPoints.get(i).getCoordinates().z * closestPointsDifferences.get(i);
-            sumWeights += closestPointsDifferences.get(i);
+            x += closestPoints.get(i).getCoordinates().x * closestPointsSimiliarity.get(i);
+            y += closestPoints.get(i).getCoordinates().y * closestPointsSimiliarity.get(i);
+            z += closestPoints.get(i).getCoordinates().z * closestPointsSimiliarity.get(i);
+            System.out.println(comp.similarity(p, db.get(i)));
+            sumWeights += closestPointsSimiliarity.get(i);
         }
         x /= sumWeights;
         y /= sumWeights;

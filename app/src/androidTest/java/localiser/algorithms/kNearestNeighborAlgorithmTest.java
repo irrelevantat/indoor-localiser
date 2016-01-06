@@ -43,7 +43,6 @@ public class kNearestNeighborAlgorithmTest extends ActivityInstrumentationTestCa
         assertNotNull(result);
 
         final int delta = 150;
-
         assertTrue(Math.abs(result.x - (float) 1781.43285731)<delta);
         assertTrue(Math.abs(result.y - (float) 2273.33183673)<delta);
         assertTrue(Math.abs(result.z - (float) 0)<delta);
