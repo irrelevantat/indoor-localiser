@@ -32,7 +32,7 @@ public class kNearestNeighborAlgorithmTest extends ActivityInstrumentationTestCa
         solo.finishOpenedActivities();
     }
 
-    public void testSimpleMatch_Simple() throws IOException {
+    public void testCloseMatch_Simple() throws IOException {
 
         AbstractLocaliserAlgorithm nna = new kNearestNeighborsAlgorithm(new SimpleComparator());
         FingerprintDatabase db = new FingerprintDatabase(solo.getCurrentActivity(), R.raw.test_fingerprints);
@@ -48,7 +48,7 @@ public class kNearestNeighborAlgorithmTest extends ActivityInstrumentationTestCa
         assertTrue(Math.abs(result.z - (float) 0)<delta);
     }
 
-    public void testSimpleMatch_Cosine() throws IOException {
+    public void testCloseMatch_Cosine() throws IOException {
 
         AbstractLocaliserAlgorithm nna = new kNearestNeighborsAlgorithm(new CosineComparator());
         FingerprintDatabase db = new FingerprintDatabase(solo.getCurrentActivity(), R.raw.test_fingerprints);

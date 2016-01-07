@@ -1,61 +1,97 @@
 package hk.ust.cse.com107x.indoor;
 
 import android.app.Activity;
+import android.media.Image;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.qozix.tileview.TileView;
+
+import java.io.IOException;
+
+import localiser.LocaliserController;
+import localiser.algorithms.AbstractLocaliserAlgorithm;
+import localiser.algorithms.ProbabilityAlgorithm;
+import localiser.algorithms.comparators.CosineComparator;
+import localiser.algorithms.kNearestNeighborsAlgorithm;
+import localiser.units.Coordinates;
+
 /**
  * Created by shubham-kapoor on 18/12/15.
  */
-public class MapActivity extends Activity {
+public class MapActivity extends Activity implements LocaliserController.Callback {
+
+    private final int FLOORS = 4;
+
+    private LocaliserController lc;
+    private  TileView tileViews[];
+    private ImageView markers[];
+    private int currentFloor = -1;
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        DisplayMetrics metrics = getResources().getDisplayMetrics();
-        int X = getIntent().getIntExtra("cordx", 0);//these values are for pixels
-        int Y = getIntent().getIntExtra("cordy",0);
-        //float X = getIntent().getFloatExtra("cordx", 0);
-        //float Y = getIntent().getFloatExtra("cordy", 0);
-        //int xi = X.intValue();
-        Log.d("Result0", Integer.toString(X));
-        int xdp = X/(metrics.densityDpi/160);
-        int ydp = Y/(metrics.densityDpi/160);
-        int Z = getIntent().getIntExtra("cordy", 0);// this value is for floor
-        setContentView(R.layout.map_activity);
-        LinearLayout layout = (LinearLayout) findViewById(R.id.IL_map);
-        ImageView img = new ImageView(this);
-        img = (ImageView)findViewById(R.id.imageView2);
-//        layout.addView(img);
-        if(img.getParent()!=null){
-            ((ViewGroup)img.getParent()).removeView(img);
+
+        AbstractLocaliserAlgorithm ala = new ProbabilityAlgorithm(new CosineComparator());
+        try {
+            lc = new LocaliserController(ala, this);
+            lc.registerForLocationUpdates(this);
+        } catch (LocaliserController.NoWIFIException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        layout.addView(img);
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(80,80);
-        layoutParams.setMargins(xdp, ydp, 0, 0);
 
-        img.setLayoutParams(layoutParams);
-        img.setBackgroundResource(R.drawable.marker);
+        tileViews = new TileView[FLOORS];
+        markers = new ImageView[FLOORS];
 
+        for (int i = 0; i < FLOORS; i++)
+        {
+            tileViews[i] = new TileView(this);
+            tileViews[i] = new TileView( this );
+            tileViews[i].setSize(2959, 2782);  // the original size of the untiled image
 
-        if(Z == 0)
-        {layout.setBackgroundResource(R.drawable.exactum0);
+            tileViews[i].addDetailLevel(1f, String.format("tile-%d-%%d_%%d.png", i));
+
+            markers[i] = new ImageView(this);
+            markers[i].setImageResource(R.drawable.marker);
+
+            tileViews[i].addMarker(markers[i], -100, 100, -0.8f, -1.0f);
         }
-        else if (Z == 1)
-            layout.setBackgroundResource(R.drawable.exactum1);
-        else if (Z == 2)
-            layout.setBackgroundResource(R.drawable.exactum2);
-        else
-            layout.setBackgroundResource(R.drawable.exactum3);
-        Log.d("Result",Integer.toString(Z));
-//        ImageView img2 = (ImageView)
-////                layoutparams
-////                imgview
+
+        setFloor(1);
+
 
 
     }
 
+    @Override
+    protected void onDestroy() {
+        lc.unregisterForLocationUpdates(this);
+        super.onDestroy();
+    }
 
+    private void setFloor(int floor)
+    {
+        if(floor==currentFloor)
+            return;
+
+        System.out.println("Set floor: " + floor);
+        currentFloor = floor;
+        setContentView(tileViews[currentFloor]);
+
+    }
+
+    @Override
+    public void locationUpdated(Coordinates c) {
+
+        setFloor(Math.round(c.z / 400));
+        tileViews[currentFloor].moveMarker(markers[currentFloor],c.x,c.y);
+
+        System.out.println(c);
+    }
 }

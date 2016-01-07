@@ -18,8 +18,7 @@ public class SimpleComparator implements InterfaceLocaliserComparator{
             if(p2.getLevel(BSSID)!=null)
             {
                 // calculate -40/-80 = 0.5
-
-                similarity += Math.max(p1.getLevel(BSSID), p2.getLevel(BSSID)) / Math.min(p1.getLevel(BSSID),p2.getLevel(BSSID));
+                similarity += ((double) Math.max(p1.getLevel(BSSID), p2.getLevel(BSSID))) / (double) Math.min(p1.getLevel(BSSID),p2.getLevel(BSSID));
                 count++;
             }
             //no penalty
@@ -27,6 +26,12 @@ public class SimpleComparator implements InterfaceLocaliserComparator{
 
         }
         //calculate average similarity of overlapping
-        return similarity/(double)count;
+        double sim = similarity/(double)count;
+        if(Double.isNaN(sim))
+        {
+            return 0;
+        }
+        else
+            return sim;
     }
 }

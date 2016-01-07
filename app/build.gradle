@@ -42,4 +42,5 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.2.1'
     androidTestCompile 'com.jayway.android.robotium:robotium-solo:5.5.3'
+    compile 'com.qozix:tileview:2.0.7'
 }

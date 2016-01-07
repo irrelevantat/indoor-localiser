@@ -96,20 +96,6 @@ public class LocaliserControllerTest extends ActivityInstrumentationTestCase2<Ma
         helperTester(algo, 2);
     }
 
-    public void testDocumentation()
-    {
-
-
-
-
-
-
-
-
-
-
-
-    }
 
 
 }

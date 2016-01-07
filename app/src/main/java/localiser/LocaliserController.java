@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 
 import java.io.IOException;
@@ -38,7 +39,6 @@ public class LocaliserController extends BroadcastReceiver
         public void locationUpdated(Coordinates c);
     }
 
-
     private final AbstractLocaliserAlgorithm algorithm;
     private final Set<Callback> callbacks = new HashSet<>();
     private final FingerprintDatabase db_finger;
@@ -71,7 +71,6 @@ public class LocaliserController extends BroadcastReceiver
         this.callbacks.add(callback);
         if(this.callbacks.size()==1)
             c.registerReceiver(this,new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
-
 
     }
     public void unregisterForLocationUpdates(final Callback callback){
@@ -119,7 +118,8 @@ public class LocaliserController extends BroadcastReceiver
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        this.locationUpdated(this.algorithm.getLocation(Fingerprint.fromScanResult(wifiManager.getScanResults()), db_finger));
+        List<ScanResult> result = wifiManager.getScanResults();
+        this.locationUpdated(this.algorithm.getLocation(Fingerprint.fromScanResult(result), db_finger));
         wifiManager.startScan();
     }
 }
