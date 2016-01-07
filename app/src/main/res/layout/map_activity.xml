@@ -9,16 +9,81 @@
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
+        android:background="@android:color/holo_blue_light"
         android:elevation="4dp"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        android:theme="@style/AppTheme"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
-    <LinearLayout
-        android:id="@+id/tile_container"
-        android:orientation="vertical"
+
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></LinearLayout>
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/tile_container"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/tile_info"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:background="@android:color/holo_blue_light"
+            android:paddingTop="0dip">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="2dip"
+                android:layout_marginBottom="15dip"
+                android:background="@android:color/holo_blue_dark"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingRight="20dip"
+                android:paddingLeft="20dip"
+                >
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Room B112"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/white"
+                        android:id="@+id/info_title" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="12 meters"
+                        android:textColor="@android:color/white"
+                        android:id="@+id/info_subtitle" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                    android:id="@+id/imageView"
+                    android:scaleType="fitStart"
+                    android:src="@drawable/ic_satellite_black_48dp"
+                    android:layout_marginBottom="-20dp"/>
+
+            </LinearLayout>
+        </LinearLayout>
+    </FrameLayout>
 
 
 </LinearLayout>

@@ -24,4 +24,5 @@ public class Coordinates
         return Math.sqrt(Math.pow(c.x-this.x,2) + Math.pow(c.y-this.y,2) + Math.pow(c.z-this.z,2));
     }
 
+
 }

@@ -30,7 +30,7 @@ public class ProbabilityAlgorithmTest extends AbstractAlgorithmTest {
 
     private void testComparator(InterfaceLocaliserComparator ilc) throws IOException {
 
-        AbstractLocaliserAlgorithm nna = new ProbabilityAlgorithm(ilc);
+        AbstractLocaliserAlgorithm nna = new AverageAlgorithm(ilc);
         FingerprintDatabase db = new FingerprintDatabase(solo.getCurrentActivity(), R.raw.test_fingerprints);
 
         //round one

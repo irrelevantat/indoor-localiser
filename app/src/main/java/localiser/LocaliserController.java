@@ -23,6 +23,8 @@ import localiser.units.Coordinates;
 import localiser.units.PointOfInterest;
 import localiser.units.Tuple;
 
+import static junit.framework.Assert.assertNotNull;
+
 /**
  * Created by sebastian on 26/12/15.
  */
@@ -46,6 +48,8 @@ public class LocaliserController extends BroadcastReceiver
     private final POIDatabase db_poi;
     private final WifiManager wifiManager;
     private final Context c;
+
+
 
     private Coordinates lastCoordinates;
 
@@ -87,18 +91,23 @@ public class LocaliserController extends BroadcastReceiver
         }
     }
 
-    public List<Tuple<Double,PointOfInterest>> getClosestPOI(Coordinates c)
+    public List<Tuple<Double,PointOfInterest>> getClosestPOI(Coordinates co)
     {
 
-        if(c == null)
+        if(co == null)
         {
-            c = lastCoordinates;
+            co = lastCoordinates;
         }
 
+
         List<Tuple<Double,PointOfInterest>> closest = new LinkedList<>();
+        if(co == null)
+        {
+            return closest;
+        }
         for(PointOfInterest poi: db_poi)
         {
-            closest.add(new Tuple<Double, PointOfInterest>(c.distance(poi.coordinates),poi));
+            closest.add(new Tuple<Double, PointOfInterest>(co.distance(poi.coordinates), poi));
         }
 
         //sort by distance
@@ -134,4 +143,11 @@ public class LocaliserController extends BroadcastReceiver
 
         wifiManager.startScan();
     }
+
+    public Coordinates getLastCoordinates() {
+        return lastCoordinates;
+    }
+
+
+
 }

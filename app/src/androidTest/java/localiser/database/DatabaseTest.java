@@ -74,7 +74,7 @@ public class DatabaseTest extends ActivityInstrumentationTestCase2<MainActivity>
     }
     public void testPOIDatabaseConstruction() throws IOException {
 
-        POIDatabase db = new POIDatabase(solo.getCurrentActivity(), R.raw.test_poi);
+        POIDatabase db = new POIDatabase(solo.getCurrentActivity(), R.raw.poi);
 
         assertTrue(db.size() > 0);
 

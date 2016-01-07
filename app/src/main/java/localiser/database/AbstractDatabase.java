@@ -12,6 +12,8 @@ import java.util.LinkedList;
 
 import hk.ust.cse.com107x.indoor.R;
 
+import static junit.framework.Assert.assertNotNull;
+
 /**
  * Created by sebastian on 05/01/16.
  */
@@ -24,7 +26,7 @@ public abstract class AbstractDatabase<T> extends AbstractList<T> implements Ite
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         StringBuffer buf = new StringBuffer();
-        assert(is!=null);
+        assertNotNull(is);
         String str;
         while ((str = reader.readLine()) != null) {
             this.readLine(str);
