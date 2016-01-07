@@ -39,6 +39,7 @@ public class LocaliserController extends BroadcastReceiver
         public void locationUpdated(Coordinates c);
     }
 
+
     private final AbstractLocaliserAlgorithm algorithm;
     private final Set<Callback> callbacks = new HashSet<>();
     private final FingerprintDatabase db_finger;
@@ -46,7 +47,7 @@ public class LocaliserController extends BroadcastReceiver
     private final WifiManager wifiManager;
     private final Context c;
 
-    private Callback callback;
+    private Coordinates lastCoordinates;
 
     public LocaliserController(AbstractLocaliserAlgorithm algorithm, Context c) throws NoWIFIException, IOException {
 
@@ -88,6 +89,12 @@ public class LocaliserController extends BroadcastReceiver
 
     public List<Tuple<Double,PointOfInterest>> getClosestPOI(Coordinates c)
     {
+
+        if(c == null)
+        {
+            c = lastCoordinates;
+        }
+
         List<Tuple<Double,PointOfInterest>> closest = new LinkedList<>();
         for(PointOfInterest poi: db_poi)
         {
@@ -119,7 +126,12 @@ public class LocaliserController extends BroadcastReceiver
     public void onReceive(Context context, Intent intent) {
 
         List<ScanResult> result = wifiManager.getScanResults();
-        this.locationUpdated(this.algorithm.getLocation(Fingerprint.fromScanResult(result), db_finger));
+        Coordinates c = this.algorithm.getLocation(Fingerprint.fromScanResult(result), db_finger);
+        if(c!=null){
+            this.locationUpdated(c);
+            lastCoordinates = c;
+        }
+
         wifiManager.startScan();
     }
 }

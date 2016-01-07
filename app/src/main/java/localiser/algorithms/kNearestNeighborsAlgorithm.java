@@ -17,7 +17,7 @@ import localiser.units.Tuple;
  */
 public class kNearestNeighborsAlgorithm extends NearestNeighborAlgorithm {
 
-    protected final int K = 5;
+    protected final int K = 4;
 
     public kNearestNeighborsAlgorithm(InterfaceLocaliserComparator comp) {
         super(comp);

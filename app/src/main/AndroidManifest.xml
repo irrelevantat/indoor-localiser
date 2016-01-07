@@ -8,7 +8,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="I-Locator"
-        android:theme="@style/AppTheme"
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:largeHeap="true" >
         <activity
             android:name=".MainActivity"
@@ -21,7 +21,7 @@
         </activity>
         <activity
             android:name=".MapActivity"
-            android:label="I-Locator">
+            android:label="Locator">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
