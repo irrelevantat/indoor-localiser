@@ -6,23 +6,23 @@ import com.robotium.solo.Solo;
 
 import java.io.IOException;
 
-import hk.ust.cse.com107x.indoor.MainActivity;
+import hk.ust.cse.com107x.indoor.MapActivity;
 import hk.ust.cse.com107x.indoor.R;
 import localiser.algorithms.comparators.CosineComparator;
 import localiser.algorithms.comparators.SimpleComparator;
-import localiser.units.Coordinates;
 import localiser.database.FingerprintDatabase;
+import localiser.units.Coordinates;
 import localiser.units.Fingerprint;
 
 /**
  * Created by sebastian on 05/01/16.
  */
-public class NearestNeighborAlgorithmTest extends ActivityInstrumentationTestCase2<MainActivity> {
+public class NearestNeighborAlgorithmTest extends ActivityInstrumentationTestCase2<MapActivity> {
 
     private Solo solo;
 
     public NearestNeighborAlgorithmTest() {
-        super(MainActivity.class);
+        super(MapActivity.class);
     }
 
     public void setUp() throws Exception {

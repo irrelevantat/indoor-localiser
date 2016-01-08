@@ -4,18 +4,19 @@ import android.test.ActivityInstrumentationTestCase2;
 
 import com.robotium.solo.Solo;
 
-import hk.ust.cse.com107x.indoor.MainActivity;
+import hk.ust.cse.com107x.indoor.MapActivity;
+import localiser.LocaliserController;
 import localiser.units.Coordinates;
 
 /**
  * Created by sebastian on 07/01/16.
  */
-public abstract class AbstractAlgorithmTest extends ActivityInstrumentationTestCase2<MainActivity> {
+public abstract class AbstractAlgorithmTest extends ActivityInstrumentationTestCase2<MapActivity> {
 
     protected Solo solo;
 
     public AbstractAlgorithmTest() {
-        super(MainActivity.class);
+        super(MapActivity.class);
     }
 
     public void setUp() throws Exception {

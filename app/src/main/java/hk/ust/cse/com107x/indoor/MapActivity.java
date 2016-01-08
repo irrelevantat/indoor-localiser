@@ -1,8 +1,18 @@
 package hk.ust.cse.com107x.indoor;
 
 import android.content.Intent;
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.LinearGradient;
+import android.graphics.Shader;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.OvalShape;
+import android.graphics.drawable.shapes.Shape;
 import android.media.Image;
 import android.os.Bundle;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -94,10 +104,16 @@ public class MapActivity extends AppCompatActivity implements View.OnClickListen
             tileViews[i].addDetailLevel(1f, String.format("tile-%d-%%d_%%d.png", i));
 
             markers[i] = new ImageView(this);
-            markers[i].setImageResource(R.drawable.marker2);
 
-            tileViews[i].addMarker(markers[i], -100, 100, -0.5f, -1.0f);
+            Resources r = getResources();
+            Drawable[] layers = new Drawable[2];
+            layers[1] = r.getDrawable(R.drawable.circle_inner);
+            layers[0] = r.getDrawable(R.drawable.circle_outer);
+            LayerDrawable layerDrawable = new LayerDrawable(layers);
 
+            markers[i].setImageDrawable(layerDrawable);
+
+            tileViews[i].addMarker(markers[i], 500, 500, -1.0f, -1.0f);
         }
 
         setFloor(1);

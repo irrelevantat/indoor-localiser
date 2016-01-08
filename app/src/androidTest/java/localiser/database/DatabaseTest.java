@@ -7,7 +7,7 @@ import com.robotium.solo.Solo;
 import java.io.IOException;
 import java.util.List;
 
-import hk.ust.cse.com107x.indoor.MainActivity;
+import hk.ust.cse.com107x.indoor.MapActivity;
 import hk.ust.cse.com107x.indoor.R;
 import localiser.LocaliserController;
 import localiser.units.Coordinates;
@@ -18,12 +18,12 @@ import localiser.units.Tuple;
 /**
  * Created by sebastian on 05/01/16.
  */
-public class DatabaseTest extends ActivityInstrumentationTestCase2<MainActivity> {
+public class DatabaseTest extends ActivityInstrumentationTestCase2<MapActivity> {
 
     private Solo solo;
 
     public DatabaseTest() {
-        super(MainActivity.class);
+        super(MapActivity.class);
     }
 
     public void setUp() throws Exception {

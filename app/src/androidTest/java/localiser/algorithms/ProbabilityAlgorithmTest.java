@@ -2,13 +2,12 @@ package localiser.algorithms;
 
 import java.io.IOException;
 
-import hk.ust.cse.com107x.indoor.MainActivity;
 import hk.ust.cse.com107x.indoor.R;
 import localiser.algorithms.comparators.CosineComparator;
 import localiser.algorithms.comparators.InterfaceLocaliserComparator;
 import localiser.algorithms.comparators.SimpleComparator;
-import localiser.units.Coordinates;
 import localiser.database.FingerprintDatabase;
+import localiser.units.Coordinates;
 import localiser.units.Fingerprint;
 
 /**

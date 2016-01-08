@@ -16,6 +16,34 @@
         <item name="colorPrimaryDark">@android:color/white</item>
         <item name="colorAccent">@android:color/white</item>
 
+        <!-- android:textColorPrimary is the  color of the title text
+       in the Toolbar, in the Theme.AppCompat theme:  -->
+        <item name="android:textColorPrimary">@android:color/white</item>
+
+        <!-- android:textColorPrimaryInverse is the  color of the title
+             text in the Toolbar, in the Theme.AppCompat.Light theme:  -->
+        <!-- <item name="android:textColorPrimaryInverse">@color/abc_primary_text_material_light</item> -->
+
+        <!-- android:textColorSecondary is the color of the menu
+         overflow icon (three vertical dots) -->
+        <item name="android:textColorSecondary">@android:color/white</item>
+
+    </style>
+
+    <style name="AppTheme.Base" parent="Theme.AppCompat.NoActionBar">
+        <!-- colorPrimary is used, for instance, for the default ActionBar
+             (but not Toolbar) background.
+              We specify the same color for the toolbar background in
+              toolbar.xml.. -->
+        <item name="colorPrimary">@android:color/white</item>
+
+        <!-- colorPrimaryDark is used for the status bar (with the
+             battery, clock, etc). -->
+        <item name="colorPrimaryDark">@android:color/white</item>
+
+        <!-- colorAccent is used as the default value for
+             colorControlActivated which is used to tint widgets. -->
+        <item name="colorAccent">@android:color/white</item>
     </style>
 
 

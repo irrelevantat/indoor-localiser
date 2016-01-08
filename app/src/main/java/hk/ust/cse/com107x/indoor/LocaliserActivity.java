@@ -3,6 +3,7 @@ package hk.ust.cse.com107x.indoor;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.support.v4.content.res.ResourcesCompat;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -67,9 +68,11 @@ public class LocaliserActivity extends MapActivity implements View.OnTouchListen
         tileViews[currentFloor].moveMarker(markers[currentFloor], c.x, c.y);
 
 
+
         if(((new Date().getTime() - lastTimeUserScrolled)/ 1000 % 60) > 5)
         {
             tileViews[currentFloor].slideToAndCenter(c.x, c.y);
+
         }
 
         System.out.println(c);
@@ -151,6 +154,7 @@ public class LocaliserActivity extends MapActivity implements View.OnTouchListen
             }
 
         }
+
     }
 
 
