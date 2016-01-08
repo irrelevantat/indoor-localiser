@@ -3,7 +3,7 @@ package localiser.algorithms;
 import localiser.algorithms.comparators.InterfaceLocaliserComparator;
 import localiser.units.Coordinates;
 import localiser.database.FingerprintDatabase;
-import localiser.database.Fingerprint;
+import localiser.units.Fingerprint;
 
 /**
  * Created by sebastian on 27/12/15.

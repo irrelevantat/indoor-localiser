@@ -1,6 +1,6 @@
 package localiser.algorithms.comparators;
 
-import localiser.database.Fingerprint;
+import localiser.units.Fingerprint;
 
 /**
  * Created by sebastian on 05/01/16.

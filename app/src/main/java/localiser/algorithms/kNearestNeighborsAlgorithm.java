@@ -1,7 +1,6 @@
 package localiser.algorithms;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -9,7 +8,7 @@ import java.util.List;
 import localiser.algorithms.comparators.InterfaceLocaliserComparator;
 import localiser.units.Coordinates;
 import localiser.database.FingerprintDatabase;
-import localiser.database.Fingerprint;
+import localiser.units.Fingerprint;
 import localiser.units.Tuple;
 
 /**

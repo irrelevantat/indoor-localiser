@@ -3,10 +3,7 @@ package localiser.algorithms.comparators;
 import java.util.HashSet;
 import java.util.Set;
 
-import localiser.algorithms.kNearestNeighborsAlgorithm;
-import localiser.database.Fingerprint;
-import localiser.database.FingerprintDatabase;
-import localiser.units.Coordinates;
+import localiser.units.Fingerprint;
 
 /**
  * Created by sebastian on 05/01/16.

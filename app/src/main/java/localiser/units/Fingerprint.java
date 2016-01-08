@@ -1,4 +1,4 @@
-package localiser.database;
+package localiser.units;
 
 import android.net.wifi.ScanResult;
 
@@ -8,8 +8,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import localiser.units.Coordinates;
 
 /**
  * Created by sebastian on 05/01/16.
@@ -86,6 +84,7 @@ public class Fingerprint implements Iterable<String>{
     {
         return this.c;
     }
+    public void setCoordinates(Coordinates c){ this.c = c; }
 
     @Override
     public Iterator<String> iterator() {
@@ -95,4 +94,13 @@ public class Fingerprint implements Iterable<String>{
     public Set<Map.Entry<String, Integer>> getEntrySet(){ return this.accessPoints.entrySet(); }
     public Set<String> getKeySet(){ return this.accessPoints.keySet(); }
 
+    public String toDatabaseString() {
+        //TODO bad design. we multiply by 400 here
+        String s = String.format("%f;%f;%f",c.x,c.y,c.z*400);
+        for(String bsiid: this.accessPoints.keySet())
+        {
+            s += String.format(";%s;%d", bsiid, this.accessPoints.get(bsiid).intValue());
+        }
+        return s;
+    }
 }

@@ -13,7 +13,7 @@ import localiser.algorithms.NearestNeighborAlgorithm;
 import localiser.algorithms.comparators.CosineComparator;
 import localiser.algorithms.comparators.SimpleComparator;
 import localiser.algorithms.kNearestNeighborsAlgorithm;
-import localiser.database.Fingerprint;
+import localiser.units.Fingerprint;
 import localiser.database.FingerprintDatabase;
 import localiser.units.Coordinates;
 

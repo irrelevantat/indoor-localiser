@@ -5,6 +5,7 @@ import android.content.Context;
 import java.io.IOException;
 
 import hk.ust.cse.com107x.indoor.R;
+import localiser.units.Fingerprint;
 
 /**
  * Created by sebastian on 05/01/16.

@@ -1,11 +1,6 @@
 package localiser.algorithms;
 
-import android.test.ActivityInstrumentationTestCase2;
-
-import com.robotium.solo.Solo;
-
 import java.io.IOException;
-import java.util.logging.LogRecord;
 
 import hk.ust.cse.com107x.indoor.MainActivity;
 import hk.ust.cse.com107x.indoor.R;
@@ -14,7 +9,7 @@ import localiser.algorithms.comparators.InterfaceLocaliserComparator;
 import localiser.algorithms.comparators.SimpleComparator;
 import localiser.units.Coordinates;
 import localiser.database.FingerprintDatabase;
-import localiser.database.Fingerprint;
+import localiser.units.Fingerprint;
 
 /**
  * Created by sebastian on 05/01/16.

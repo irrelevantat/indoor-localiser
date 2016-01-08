@@ -15,9 +15,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import hk.ust.cse.com107x.indoor.R;
 import localiser.algorithms.AbstractLocaliserAlgorithm;
 import localiser.database.FingerprintDatabase;
-import localiser.database.Fingerprint;
+import localiser.units.Fingerprint;
 import localiser.database.POIDatabase;
 import localiser.units.Coordinates;
 import localiser.units.PointOfInterest;
@@ -46,8 +47,8 @@ public class LocaliserController extends BroadcastReceiver
     private final Set<Callback> callbacks = new HashSet<>();
     private final FingerprintDatabase db_finger;
     private final POIDatabase db_poi;
-    private final WifiManager wifiManager;
-    private final Context c;
+    protected final WifiManager wifiManager;
+    protected final Context c;
 
 
 
@@ -55,9 +56,10 @@ public class LocaliserController extends BroadcastReceiver
 
     public LocaliserController(AbstractLocaliserAlgorithm algorithm, Context c) throws NoWIFIException, IOException {
 
-        this.db_finger = new FingerprintDatabase(c);
+        this.db_finger = new FingerprintDatabase(c, R.raw.k123);
         this.db_poi = new POIDatabase(c);
         this.c = c;
+        this.algorithm = algorithm;
 
         this.wifiManager = (WifiManager) c.getSystemService(Context.WIFI_SERVICE);
 
@@ -67,7 +69,6 @@ public class LocaliserController extends BroadcastReceiver
             throw new NoWIFIException("WIFI is not enabled");
         }
 
-        this.algorithm = algorithm;
     }
 
     public void registerForLocationUpdates(final Callback callback)

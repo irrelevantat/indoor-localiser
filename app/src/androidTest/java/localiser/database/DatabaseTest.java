@@ -11,6 +11,7 @@ import hk.ust.cse.com107x.indoor.MainActivity;
 import hk.ust.cse.com107x.indoor.R;
 import localiser.LocaliserController;
 import localiser.units.Coordinates;
+import localiser.units.Fingerprint;
 import localiser.units.PointOfInterest;
 import localiser.units.Tuple;
 

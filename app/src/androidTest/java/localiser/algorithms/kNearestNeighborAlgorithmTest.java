@@ -12,7 +12,7 @@ import localiser.algorithms.comparators.CosineComparator;
 import localiser.algorithms.comparators.SimpleComparator;
 import localiser.units.Coordinates;
 import localiser.database.FingerprintDatabase;
-import localiser.database.Fingerprint;
+import localiser.units.Fingerprint;
 
 /**
  * Created by sebastian on 05/01/16.
