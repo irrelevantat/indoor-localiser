@@ -76,7 +76,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="5"
-                    android:id="@+id/imageView"
+                    android:id="@+id/info_image"
                     android:scaleType="fitStart"
                     android:src="@drawable/ic_satellite_black_48dp"
                     android:layout_marginBottom="-20dp"/>

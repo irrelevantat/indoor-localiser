@@ -53,6 +53,7 @@ public class MapActivity extends AppCompatActivity implements LocaliserControlle
     private LinearLayout infoBox;
     private TextView infoTitle;
     private TextView infoSubtitle;
+    private View infoImage;
 
     private final LinkedList<ImageView> poiMarkers = new LinkedList<>();
 
@@ -78,6 +79,7 @@ public class MapActivity extends AppCompatActivity implements LocaliserControlle
         infoBox = (LinearLayout) findViewById(R.id.tile_info);
         infoTitle = (TextView) findViewById(R.id.info_title);
         infoSubtitle = (TextView) findViewById(R.id.info_subtitle);
+        infoImage = findViewById(R.id.info_image);
         infoBox.setVisibility(View.INVISIBLE);
         infoBox.setOnClickListener(this);
 
@@ -213,8 +215,15 @@ public class MapActivity extends AppCompatActivity implements LocaliserControlle
             infoTitle.setText(poi.name);
             infoSubtitle.setText(String.format("Distance: %d meter", (int) (POIDatabase.METERS_PER_PIXEL * poi.coordinates.distance(lc.getLastCoordinates()))));
             infoBox.setVisibility(View.VISIBLE);
-            String url = String.format("http://www.helsinki.fi/teknos/opetustilat/kumpula/gh2b/%s.htm", poi.name.toLowerCase());
-            infoBox.setTag(url);
+            if(poi.hasWebsite)
+            {
+                infoImage.setVisibility(View.VISIBLE);
+                String url = String.format("http://www.helsinki.fi/teknos/opetustilat/kumpula/gh2b/%s.htm", poi.name.toLowerCase());
+                infoBox.setTag(url);
+            }
+            else{
+                infoImage.setVisibility(View.INVISIBLE);
+            }
 
         }
 
@@ -223,10 +232,18 @@ public class MapActivity extends AppCompatActivity implements LocaliserControlle
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(this, RoomActivity.class);
-        intent.putExtra(RoomActivity.INTENT_DISTANCE,infoSubtitle.getText());
-        intent.putExtra(RoomActivity.INTENT_ROOM,infoTitle.getText());
-        intent.putExtra(RoomActivity.INTENT_URL, (String) infoBox.getTag());
-        startActivity(intent);
+
+        if(infoBox.getTag()!=null)
+        {
+
+            Intent intent = new Intent(this, RoomActivity.class);
+            intent.putExtra(RoomActivity.INTENT_DISTANCE,infoSubtitle.getText());
+            intent.putExtra(RoomActivity.INTENT_ROOM,infoTitle.getText());
+            intent.putExtra(RoomActivity.INTENT_URL, (String) infoBox.getTag());
+            startActivity(intent);
+
+            infoBox.setTag(null);
+
+        }
     }
 }
