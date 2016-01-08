@@ -5,7 +5,7 @@
     <item
         android:id="@+id/action_other"
         android:icon="@drawable/ic_near_me_white_24dp"
-        android:title="Points of interest"
+        android:title="Class rooms near you"
         app:showAsAction="ifRoom"/>
 
     <!-- Settings, should always be in the overflow -->
