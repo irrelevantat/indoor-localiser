@@ -117,6 +117,9 @@ public class MapActivity extends AppCompatActivity implements View.OnClickListen
         }
 
         setFloor(1);
+        View V = this.getWindow().getDecorView().findViewById(R.id.action_other);
+        if (V!=null)
+        {V.setContentDescription("Search near by places");}
 
 
 
