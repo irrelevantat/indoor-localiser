@@ -1,19 +1,13 @@
-package hk.ust.cse.com107x.indoor;
-import android.app.Activity;
-import android.content.Intent;
+package fi.helsinki.cs.shubhamhojas.gui;
+
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.Switch;
-import android.widget.TextView;
+
+import fi.helsinki.cs.shubhamhojas.R;
 
 
 public class RoomActivity extends AppCompatActivity implements View.OnClickListener {

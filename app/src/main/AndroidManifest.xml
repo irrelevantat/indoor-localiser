@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="hk.ust.cse.com107x.indoor" >
+    package="fi.helsinki.cs.shubhamhojas" >
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
@@ -10,18 +10,14 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/icon"
-        android:label="I-Locator"
+        android:label="Localiser"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:largeHeap="true" >
         <activity
-            android:name=".RoomActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:name=".gui.RoomActivity" >
         </activity>
         <activity
-            android:name=".LocaliserActivity"
+            android:name=".gui.LocaliserActivity"
             android:label="Localiser">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,23 +25,10 @@
             </intent-filter>
 
         </activity>
-        <activity
-            android:name=".FieldTestActivity"
-            android:label="FieldTest">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
 
-        </activity>
         <activity
-            android:name=".DesignPathActivity"
+            android:name=".gui.DesignPathActivity"
             android:label="DesignPath">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-
         </activity>
 
     </application>

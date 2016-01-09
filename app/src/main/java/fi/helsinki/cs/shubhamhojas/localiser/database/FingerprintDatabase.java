@@ -1,11 +1,12 @@
-package localiser.database;
+package fi.helsinki.cs.shubhamhojas.localiser.database;
 
 import android.content.Context;
 
 import java.io.IOException;
 
-import hk.ust.cse.com107x.indoor.R;
-import localiser.units.Fingerprint;
+import fi.helsinki.cs.shubhamhojas.R;
+import fi.helsinki.cs.shubhamhojas.localiser.units.Fingerprint;
+
 
 /**
  * Created by sebastian on 05/01/16.

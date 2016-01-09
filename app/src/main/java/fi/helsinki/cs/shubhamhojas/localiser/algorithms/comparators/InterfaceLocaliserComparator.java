@@ -1,6 +1,5 @@
-package localiser.algorithms.comparators;
-
-import localiser.units.Fingerprint;
+package fi.helsinki.cs.shubhamhojas.localiser.algorithms.comparators;
+import fi.helsinki.cs.shubhamhojas.localiser.units.Fingerprint;
 
 /**
  * Created by sebastian on 05/01/16.

@@ -1,4 +1,4 @@
-package localiser.database;
+package fi.helsinki.cs.shubhamhojas.localiser.database;
 
 import android.content.Context;
 
@@ -10,7 +10,6 @@ import java.util.AbstractList;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import hk.ust.cse.com107x.indoor.R;
 
 import static junit.framework.Assert.assertNotNull;
 

@@ -1,5 +1,6 @@
 package localiser;
 
+
 import android.test.ActivityInstrumentationTestCase2;
 
 import com.robotium.solo.Solo;
@@ -7,15 +8,13 @@ import com.robotium.solo.Solo;
 import java.io.IOException;
 import java.util.concurrent.CountDownLatch;
 
-import hk.ust.cse.com107x.indoor.MapActivity;
-import localiser.algorithms.AbstractLocaliserAlgorithm;
-import localiser.algorithms.NearestNeighborAlgorithm;
-import localiser.algorithms.comparators.CosineComparator;
-import localiser.algorithms.comparators.SimpleComparator;
-import localiser.algorithms.kNearestNeighborsAlgorithm;
-import localiser.units.Fingerprint;
-import localiser.database.FingerprintDatabase;
-import localiser.units.Coordinates;
+import fi.helsinki.cs.shubhamhojas.R;
+import fi.helsinki.cs.shubhamhojas.gui.*;
+import fi.helsinki.cs.shubhamhojas.controller.*;
+import fi.helsinki.cs.shubhamhojas.localiser.algorithms.*;
+import fi.helsinki.cs.shubhamhojas.localiser.algorithms.comparators.*;
+import fi.helsinki.cs.shubhamhojas.localiser.database.*;
+import fi.helsinki.cs.shubhamhojas.localiser.units.*;
 
 
 /**
@@ -41,6 +40,7 @@ public class LocaliserControllerTest extends ActivityInstrumentationTestCase2<Ma
         final CountDownLatch semaphore = new CountDownLatch(kTimes);
 
         LocaliserController testController = new LocaliserController(algo, solo.getCurrentActivity());
+
         LocaliserController.Callback cb = new LocaliserController.Callback() {
             @Override
             public void locationUpdated(Coordinates c) {

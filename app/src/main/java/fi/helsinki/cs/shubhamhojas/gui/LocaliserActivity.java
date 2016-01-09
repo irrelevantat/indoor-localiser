@@ -1,11 +1,9 @@
-package hk.ust.cse.com107x.indoor;
+package fi.helsinki.cs.shubhamhojas.gui;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.support.v4.content.res.ResourcesCompat;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -13,21 +11,21 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.qozix.tileview.TileView;
 import com.qozix.tileview.markers.MarkerLayout;
 
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
-import localiser.LocaliserController;
-import localiser.algorithms.AbstractLocaliserAlgorithm;
-import localiser.algorithms.AverageAlgorithm;
-import localiser.algorithms.comparators.CosineComparator;
-import localiser.database.POIDatabase;
-import localiser.units.Coordinates;
-import localiser.units.PointOfInterest;
-import localiser.units.Tuple;
+import fi.helsinki.cs.shubhamhojas.R;
+import fi.helsinki.cs.shubhamhojas.controller.LocaliserController;
+import fi.helsinki.cs.shubhamhojas.localiser.algorithms.AbstractLocaliserAlgorithm;
+import fi.helsinki.cs.shubhamhojas.localiser.algorithms.AverageAlgorithm;
+import fi.helsinki.cs.shubhamhojas.localiser.algorithms.comparators.CosineComparator;
+import fi.helsinki.cs.shubhamhojas.localiser.database.POIDatabase;
+import fi.helsinki.cs.shubhamhojas.localiser.units.Coordinates;
+import fi.helsinki.cs.shubhamhojas.localiser.units.PointOfInterest;
+import fi.helsinki.cs.shubhamhojas.localiser.units.Tuple;
 
 /**
  * Created by sebastian on 08/01/16.
@@ -243,7 +241,7 @@ public class LocaliserActivity extends MapActivity implements View.OnTouchListen
 
     protected void setFloor(int floor){
         super.setFloor(floor);
-
+        
         char floorLabel;
         if(floor==0)
         {

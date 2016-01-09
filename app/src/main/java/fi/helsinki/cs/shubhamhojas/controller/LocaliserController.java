@@ -1,4 +1,4 @@
-package localiser;
+package fi.helsinki.cs.shubhamhojas.controller;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -15,16 +15,14 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-import hk.ust.cse.com107x.indoor.R;
-import localiser.algorithms.AbstractLocaliserAlgorithm;
-import localiser.database.FingerprintDatabase;
-import localiser.units.Fingerprint;
-import localiser.database.POIDatabase;
-import localiser.units.Coordinates;
-import localiser.units.PointOfInterest;
-import localiser.units.Tuple;
-
-import static junit.framework.Assert.assertNotNull;
+import fi.helsinki.cs.shubhamhojas.R;
+import fi.helsinki.cs.shubhamhojas.localiser.algorithms.AbstractLocaliserAlgorithm;
+import fi.helsinki.cs.shubhamhojas.localiser.database.FingerprintDatabase;
+import fi.helsinki.cs.shubhamhojas.localiser.database.POIDatabase;
+import fi.helsinki.cs.shubhamhojas.localiser.units.Coordinates;
+import fi.helsinki.cs.shubhamhojas.localiser.units.Fingerprint;
+import fi.helsinki.cs.shubhamhojas.localiser.units.PointOfInterest;
+import fi.helsinki.cs.shubhamhojas.localiser.units.Tuple;
 
 /**
  * Created by sebastian on 26/12/15.

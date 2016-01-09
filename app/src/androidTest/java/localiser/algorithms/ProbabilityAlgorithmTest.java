@@ -2,13 +2,13 @@ package localiser.algorithms;
 
 import java.io.IOException;
 
-import hk.ust.cse.com107x.indoor.R;
-import localiser.algorithms.comparators.CosineComparator;
-import localiser.algorithms.comparators.InterfaceLocaliserComparator;
-import localiser.algorithms.comparators.SimpleComparator;
-import localiser.database.FingerprintDatabase;
-import localiser.units.Coordinates;
-import localiser.units.Fingerprint;
+import fi.helsinki.cs.shubhamhojas.R;
+import fi.helsinki.cs.shubhamhojas.gui.*;
+import fi.helsinki.cs.shubhamhojas.controller.*;
+import fi.helsinki.cs.shubhamhojas.localiser.algorithms.*;
+import fi.helsinki.cs.shubhamhojas.localiser.algorithms.comparators.*;
+import fi.helsinki.cs.shubhamhojas.localiser.database.*;
+import fi.helsinki.cs.shubhamhojas.localiser.units.*;
 
 /**
  * Created by sebastian on 05/01/16.

@@ -24,7 +24,7 @@ android {
     buildToolsVersion "22.0.1"
 
     defaultConfig {
-        applicationId "hk.ust.cse.com107x.indoor"
+        applicationId "fi.helsinki.cs.shubhamhojas"
         minSdkVersion 14
         targetSdkVersion 22
         versionCode 1

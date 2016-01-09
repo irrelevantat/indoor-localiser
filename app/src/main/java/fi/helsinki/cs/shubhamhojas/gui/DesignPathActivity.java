@@ -1,4 +1,4 @@
-package hk.ust.cse.com107x.indoor;
+package fi.helsinki.cs.shubhamhojas.gui;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -18,10 +18,10 @@ import com.qozix.tileview.paths.CompositePathView;
 import java.io.IOException;
 import java.util.List;
 
-import localiser.CollectorController;
-import localiser.LocaliserController;
-import localiser.units.Coordinates;
-import localiser.units.Fingerprint;
+import fi.helsinki.cs.shubhamhojas.R;
+import fi.helsinki.cs.shubhamhojas.controller.CollectorController;
+import fi.helsinki.cs.shubhamhojas.controller.LocaliserController;
+import fi.helsinki.cs.shubhamhojas.localiser.units.Coordinates;
 
 import static android.R.color.holo_blue_light;
 import static junit.framework.Assert.assertTrue;

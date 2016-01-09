@@ -1,9 +1,10 @@
-package localiser.algorithms.comparators;
+package fi.helsinki.cs.shubhamhojas.localiser.algorithms.comparators;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import localiser.units.Fingerprint;
+import fi.helsinki.cs.shubhamhojas.localiser.units.Fingerprint;
+
 
 /**
  * Created by sebastian on 05/01/16.

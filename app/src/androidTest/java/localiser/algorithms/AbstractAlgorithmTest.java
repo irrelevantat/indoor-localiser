@@ -4,9 +4,8 @@ import android.test.ActivityInstrumentationTestCase2;
 
 import com.robotium.solo.Solo;
 
-import hk.ust.cse.com107x.indoor.MapActivity;
-import localiser.LocaliserController;
-import localiser.units.Coordinates;
+import fi.helsinki.cs.shubhamhojas.gui.MapActivity;
+import fi.helsinki.cs.shubhamhojas.localiser.units.Coordinates;
 
 /**
  * Created by sebastian on 07/01/16.

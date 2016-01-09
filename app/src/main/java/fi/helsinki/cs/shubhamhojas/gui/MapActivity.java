@@ -1,52 +1,25 @@
-package hk.ust.cse.com107x.indoor;
+package fi.helsinki.cs.shubhamhojas.gui;
 
-import android.content.Intent;
 import android.content.res.Resources;
-import android.graphics.Color;
-import android.graphics.LinearGradient;
-import android.graphics.Shader;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.OvalShape;
-import android.graphics.drawable.shapes.Shape;
-import android.media.Image;
 import android.os.Bundle;
-import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.qozix.tileview.TileView;
-import com.qozix.tileview.markers.MarkerLayout;
 
-import org.w3c.dom.Text;
-
-import java.io.IOException;
-import java.util.Date;
 import java.util.LinkedList;
-import java.util.List;
 
-import localiser.LocaliserController;
-import localiser.algorithms.AbstractLocaliserAlgorithm;
-import localiser.algorithms.AverageAlgorithm;
-import localiser.algorithms.comparators.CosineComparator;
-import localiser.database.POIDatabase;
-import localiser.units.Coordinates;
-import localiser.units.PointOfInterest;
-import localiser.units.Tuple;
+import fi.helsinki.cs.shubhamhojas.R;
 
 
 /**

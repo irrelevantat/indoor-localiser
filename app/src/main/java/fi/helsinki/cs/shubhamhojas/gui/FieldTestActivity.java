@@ -1,16 +1,15 @@
-package hk.ust.cse.com107x.indoor;
+package fi.helsinki.cs.shubhamhojas.gui;
 
 import android.app.Activity;
 import android.os.Bundle;
 
 import java.io.IOException;
 
-import localiser.LocaliserController;
-import localiser.algorithms.AbstractLocaliserAlgorithm;
-import localiser.algorithms.comparators.CosineComparator;
-import localiser.algorithms.comparators.SimpleComparator;
-import localiser.algorithms.kNearestNeighborsAlgorithm;
-import localiser.units.Coordinates;
+import fi.helsinki.cs.shubhamhojas.controller.LocaliserController;
+import fi.helsinki.cs.shubhamhojas.localiser.algorithms.AbstractLocaliserAlgorithm;
+import fi.helsinki.cs.shubhamhojas.localiser.algorithms.comparators.CosineComparator;
+import fi.helsinki.cs.shubhamhojas.localiser.algorithms.kNearestNeighborsAlgorithm;
+import fi.helsinki.cs.shubhamhojas.localiser.units.Coordinates;
 
 /**
  * Created by sebastian on 07/01/16.

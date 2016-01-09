@@ -1,6 +1,5 @@
-package localiser;
+package fi.helsinki.cs.shubhamhojas.controller;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -9,26 +8,20 @@ import android.net.wifi.WifiManager;
 import android.os.Environment;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.PriorityQueue;
-import java.util.Queue;
 import java.util.Stack;
 
-import localiser.units.Coordinates;
-import localiser.units.Fingerprint;
-import localiser.units.Tuple;
+import fi.helsinki.cs.shubhamhojas.localiser.units.Coordinates;
+import fi.helsinki.cs.shubhamhojas.localiser.units.Fingerprint;
+import fi.helsinki.cs.shubhamhojas.localiser.units.Tuple;
 
-import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Created by sebastian on 08/01/16.

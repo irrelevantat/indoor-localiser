@@ -1,12 +1,13 @@
-package localiser.algorithms;
+package fi.helsinki.cs.shubhamhojas.localiser.algorithms;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import localiser.algorithms.comparators.InterfaceLocaliserComparator;
-import localiser.units.Fingerprint;
-import localiser.database.FingerprintDatabase;
-import localiser.units.Coordinates;
+import fi.helsinki.cs.shubhamhojas.localiser.algorithms.comparators.InterfaceLocaliserComparator;
+import fi.helsinki.cs.shubhamhojas.localiser.database.FingerprintDatabase;
+import fi.helsinki.cs.shubhamhojas.localiser.units.Coordinates;
+import fi.helsinki.cs.shubhamhojas.localiser.units.Fingerprint;
+
 
 /**
  * Created by sebastian on 07/01/16.
