@@ -106,21 +106,21 @@ public class DesignPathActivity extends MapActivity implements DialogInterface.O
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if(item.getItemId()==R.id.action_other
+        if(item.getItemId()==R.id.action_aroundme
                 && mode == Mode.EDIT_MODE)
         {
             mode = Mode.PREPARE_MODE;
             ab.setTitle("Prepare");
             this.prepareWalk();
         }
-        else if(item.getItemId()==R.id.action_other
+        else if(item.getItemId()==R.id.action_aroundme
                 && mode == Mode.PREPARE_MODE)
         {
             mode = Mode.WALK_MODE;
             ab.setTitle("Walk");
             cc.startRecording(cc.path.get(currentPoint - 2));
         }
-        else if(item.getItemId()==R.id.action_other
+        else if(item.getItemId()==R.id.action_aroundme
                 && mode == Mode.WALK_MODE)
         {
             addPath(cc.path.get(currentPoint - 2), cc.path.get(currentPoint - 1));
@@ -146,7 +146,7 @@ public class DesignPathActivity extends MapActivity implements DialogInterface.O
             }
 
         }
-        else if(item.getItemId()==R.id.action_other
+        else if(item.getItemId()==R.id.action_aroundme
                 && mode == Mode.DONE_MODE)
         {
             cc.savePoints();

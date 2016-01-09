@@ -3,9 +3,15 @@
 
     <!-- "Mark Favorite", should appear as action button if possible -->
     <item
-        android:id="@+id/action_other"
+        android:id="@+id/action_aroundme"
         android:icon="@drawable/ic_near_me_white_24dp"
         android:title="Class rooms near you"
+        app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/action_location"
+        android:icon="@drawable/ic_my_location_white_24dp"
+        android:title="Show current location"
         app:showAsAction="ifRoom"/>
 
     <!-- Settings, should always be in the overflow -->

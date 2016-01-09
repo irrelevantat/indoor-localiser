@@ -73,15 +73,14 @@ public class LocaliserController extends BroadcastReceiver
 
     public void registerForLocationUpdates(final Callback callback)
     {
-
-        this.callbacks.add(callback);
-        if(this.callbacks.size()==1)
+        //only register if add was successful and this was the first addition
+        if(this.callbacks.add(callback) && this.callbacks.size()==1)
             c.registerReceiver(this,new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
 
     }
     public void unregisterForLocationUpdates(final Callback callback){
-        this.callbacks.remove(callback);
-        if(this.callbacks.size()==0)
+        //only unregister if remove was successful and size is zero now
+        if(this.callbacks.remove(callback) && this.callbacks.size()==0)
             c.unregisterReceiver(this);
     }
 

@@ -1,9 +1,13 @@
 package hk.ust.cse.com107x.indoor;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v4.content.res.ResourcesCompat;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -38,32 +42,82 @@ public class LocaliserActivity extends MapActivity implements View.OnTouchListen
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        AbstractLocaliserAlgorithm ala = new AverageAlgorithm(new CosineComparator());
-        try {
-            lc = new LocaliserController(ala, this);
-            lc.registerForLocationUpdates(this);
-        } catch (LocaliserController.NoWIFIException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
         for (int i = 0; i < FLOORS; i++)
         {
             tileViews[i].setOnTouchListener(this);
             tileViews[i].setMarkerTapListener(this);
         }
+        ab.setTitle("Locating...");
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
     }
 
     @Override
     protected void onDestroy() {
-        lc.unregisterForLocationUpdates(this);
+        if(lc!=null)
+        {
+            lc.unregisterForLocationUpdates(this);
+        }
         super.onDestroy();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        //do this as long as our controller is not registered
+        //showWIFIDisabledAlert blocks
+        if(lc == null)
+        {
+            try {
+                AbstractLocaliserAlgorithm ala = new AverageAlgorithm(new CosineComparator());
+                lc = new LocaliserController(ala, this);
+                lc.registerForLocationUpdates(this);
+            } catch (LocaliserController.NoWIFIException e) {
+                //show error
+                this.showWIFIDisabledAlert();
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+                //unresolvable database read error
+                finish();
+            }
+        }
+    }
+
+    private void showWIFIDisabledAlert(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("We need WIFI to calculate your position.");
+        builder.setPositiveButton("Go to Settings", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                startActivity(new Intent(android.provider.Settings.ACTION_WIRELESS_SETTINGS));
+            }
+        });
+        builder.setNegativeButton("Exit", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                LocaliserActivity.this.finish();
+            }
+
+        });
+        builder.setCancelable(false);
+        //blocks
+        builder.create().show();
     }
 
 
     @Override
     public void locationUpdated(Coordinates c) {
+
+        if(c==null)
+        {
+            return;
+        }
 
         setFloor(Math.round(c.z / 400));
         tileViews[currentFloor].moveMarker(markers[currentFloor], c.x, c.y);
@@ -72,8 +126,13 @@ public class LocaliserActivity extends MapActivity implements View.OnTouchListen
 
         if(((new Date().getTime() - lastTimeUserScrolled)/ 1000 % 60) > 5)
         {
+            //invalidate menu icon if this is for the first time
+            if(lastTimeUserScrolled != 0)
+            {
+                invalidateOptionsMenu();
+                lastTimeUserScrolled = 0;
+            }
             tileViews[currentFloor].slideToAndCenter(c.x, c.y);
-
         }
 
         System.out.println(c);
@@ -86,7 +145,9 @@ public class LocaliserActivity extends MapActivity implements View.OnTouchListen
             if(infoBox.getVisibility()==View.VISIBLE)
                 infoBox.setVisibility(View.INVISIBLE);
 
+            //set menu to blue again
             lastTimeUserScrolled = new Date().getTime();
+            invalidateOptionsMenu();
             return tileViews[currentFloor].onTouchEvent(event);
         }
 
@@ -131,7 +192,7 @@ public class LocaliserActivity extends MapActivity implements View.OnTouchListen
         }
     }
 
-    private void showPOI()
+    private void onShowPOI()
     {
         for(View iv: poiMarkers)
         {
@@ -160,13 +221,24 @@ public class LocaliserActivity extends MapActivity implements View.OnTouchListen
 
     }
 
+    public void onShowCurrentLocation()
+    {
+        if(lc.getLastCoordinates()!=null)
+          tileViews[currentFloor].slideToAndCenter(lc.getLastCoordinates().x, lc.getLastCoordinates().y);
+        lastTimeUserScrolled=0;
+        invalidateOptionsMenu();
+
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if(item.getItemId()==R.id.action_other)
+        if(item.getItemId()==R.id.action_aroundme)
         {
-            this.showPOI();
+            this.onShowPOI();
+        }
+        else if(item.getItemId()==R.id.action_location){
+            this.onShowCurrentLocation();
         }
 
         return true;
@@ -174,6 +246,30 @@ public class LocaliserActivity extends MapActivity implements View.OnTouchListen
 
     protected void setFloor(int floor){
         super.setFloor(floor);
-        ab.setTitle("Localiser at " + floor);
+
+        char floorLabel;
+        if(floor==0)
+        {
+            floorLabel = 'K';
+        }
+        else{
+            floorLabel = (char)('0'+floor);
+        }
+        ab.setTitle("Floor " + floorLabel);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+
+        if(lastTimeUserScrolled==0)
+            menu.getItem(1).setIcon(R.drawable.ic_my_location_blue_24dp);
+        else
+            menu.getItem(1).setIcon(R.drawable.ic_my_location_white_24dp);
+
+
+        return true;
+    }
+
 }

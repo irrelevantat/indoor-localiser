@@ -22,6 +22,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -56,6 +57,7 @@ public class MapActivity extends AppCompatActivity implements View.OnClickListen
     protected final int FLOORS = 4;
     protected final int MAP_WIDTH = 2959;
     protected final int MAP_HEIGHT = 2782;
+    protected final int MAP_PADDING = 1400;
 
     private LinearLayout container;
     protected TileView tileViews[];
@@ -99,7 +101,10 @@ public class MapActivity extends AppCompatActivity implements View.OnClickListen
         for (int i = 0; i < FLOORS; i++)
         {
             tileViews[i] = new TileView(this);
-            tileViews[i].setSize(MAP_WIDTH, MAP_HEIGHT);  // the original size of the untiled image
+            tileViews[i].setSize(MAP_WIDTH+MAP_PADDING, MAP_HEIGHT+MAP_PADDING);  // the original size of the untiled image
+            //define our own coordiante system from
+            tileViews[i].defineBounds(-MAP_PADDING/2,-MAP_PADDING/2,MAP_WIDTH+MAP_PADDING/2,MAP_HEIGHT+MAP_PADDING/2);
+
 
             tileViews[i].addDetailLevel(1f, String.format("tile-%d-%%d_%%d.png", i));
 
@@ -113,15 +118,10 @@ public class MapActivity extends AppCompatActivity implements View.OnClickListen
 
             markers[i].setImageDrawable(layerDrawable);
 
-            tileViews[i].addMarker(markers[i], 500, 500, -1.0f, -1.0f);
+            tileViews[i].addMarker(markers[i], -50, -50, -0.5f, -0.5f);
         }
 
         setFloor(1);
-        View V = this.getWindow().getDecorView().findViewById(R.id.action_other);
-        if (V!=null)
-        {V.setContentDescription("Search near by places");}
-
-
 
     }
 
