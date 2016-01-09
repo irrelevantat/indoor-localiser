@@ -9,7 +9,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/icon"
         android:label="I-Locator"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:largeHeap="true" >
