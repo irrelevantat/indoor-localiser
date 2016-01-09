@@ -7,6 +7,7 @@ import android.support.v4.content.res.ResourcesCompat;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.ImageView;
 
 import com.qozix.tileview.TileView;
@@ -139,16 +140,18 @@ public class LocaliserActivity extends MapActivity implements View.OnTouchListen
         poiMarkers.clear();
 
         final List<Tuple<Double, PointOfInterest>> closestPOI = lc.getClosestPOI(null,10);
-        for(Tuple<Double, PointOfInterest> poi: closestPOI)
+        for(final Tuple<Double, PointOfInterest> poi: closestPOI)
         {
             Coordinates coordinates = poi.second.coordinates;
             if(coordinates.z/400 == currentFloor)
             {
-                ImageView iv = new ImageView(this);
+               ImageView iv = new ImageView(this);
                 iv.setImageResource(R.drawable.marker2);
                 //Save poi
                 iv.setTag(poi.second);
                 poiMarkers.add(iv);
+
+                iv.setContentDescription(poi.second.name+String.format(" is %d meters away from you", (int) (POIDatabase.METERS_PER_PIXEL * poi.second.coordinates.distance(lc.getLastCoordinates()))));
 
                 tileViews[currentFloor].addMarker(iv, coordinates.x, coordinates.y, -0.5f, -1.0f);
             }
