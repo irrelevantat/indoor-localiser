@@ -29,8 +29,12 @@
             android:name=".gui.RoomActivity" >
         </activity>
         <activity
-            android:name=".gui.DesignPathActivity"
+            android:name=".gui.CollectFingerprintsActivity"
             android:label="DesignPath">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
 
     </application>

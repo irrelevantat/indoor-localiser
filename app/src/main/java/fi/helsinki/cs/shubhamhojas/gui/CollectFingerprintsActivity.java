@@ -30,20 +30,16 @@ import static junit.framework.Assert.assertTrue;
 /**
  * Created by sebastian on 08/01/16.
  */
-public class DesignPathActivity extends MapActivity implements DialogInterface.OnClickListener, HotSpot.HotSpotTapListener {
+public class CollectFingerprintsActivity extends MapActivity implements DialogInterface.OnClickListener, HotSpot.HotSpotTapListener {
 
     enum Mode
     {
         EDIT_MODE,
         PREPARE_MODE,
         WALK_MODE,
-        DONE_MODE,
-        SAVED_MODE
+        DONE_MODE
     };
 
-
-    // 1. Set floor
-    // 2. finalise ->
 
     private EditText et;
     private Mode mode = Mode.EDIT_MODE;
@@ -95,11 +91,16 @@ public class DesignPathActivity extends MapActivity implements DialogInterface.O
 
         if(mode==Mode.EDIT_MODE)
         {
+            int x_pad = x-MAP_PADDING/2;
+            int y_pad = y-MAP_PADDING/2;
+
+            System.out.println("Added point to path: " + x_pad + " - " + y_pad);
+
             View iv = getNextPointView();
             currentPoint++;
-            cc.addToPath(x,y,currentFloor);
+            cc.addToPath(x_pad,y_pad,currentFloor);
             poiMarkers.add(iv);
-            tileViews[currentFloor].addMarker(iv, x, y, -0.5f, -0.5f);
+            tileViews[currentFloor].addMarker(iv, x_pad, y_pad, -0.5f, -0.5f);
         }
     }
     @Override
@@ -160,8 +161,8 @@ public class DesignPathActivity extends MapActivity implements DialogInterface.O
     {
         CompositePathView.DrawablePath drawablePath = new CompositePathView.DrawablePath();
         Path path = new Path();
-        path.moveTo(src.x, src.y);
-        path.lineTo(end.x,end.y);
+        path.moveTo(src.x+MAP_PADDING/2, src.y+MAP_PADDING/2);
+        path.lineTo(end.x+MAP_PADDING/2,end.y+MAP_PADDING/2);
         drawablePath.path = path;
         Paint paint = new Paint();
         paint.setColor(0xFFFF00FF);

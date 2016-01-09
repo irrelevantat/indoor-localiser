@@ -48,3 +48,6 @@ local.properties
 *~
 *.swp
 
+	app/gradle/
+	app/gradlew
+	app/gradlew.bat
