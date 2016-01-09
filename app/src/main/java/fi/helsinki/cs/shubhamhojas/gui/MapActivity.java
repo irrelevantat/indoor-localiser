@@ -90,8 +90,10 @@ public class MapActivity extends AppCompatActivity implements View.OnClickListen
             LayerDrawable layerDrawable = new LayerDrawable(layers);
 
             markers[i].setImageDrawable(layerDrawable);
-
-            tileViews[i].addMarker(markers[i], -50, -50, -0.5f, -0.5f);
+            markers[i].setContentDescription("You are here");
+            //hide marker for the beginning
+            tileViews[i].addMarker(markers[i], -MAP_PADDING, -MAP_PADDING, -0.5f, -0.5f);
+            tileViews[i].scrollToAndCenter(MAP_WIDTH / 2, MAP_HEIGHT/2);
         }
 
         setFloor(1);

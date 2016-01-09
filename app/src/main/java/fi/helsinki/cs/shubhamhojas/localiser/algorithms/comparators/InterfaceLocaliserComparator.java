@@ -8,12 +8,12 @@ public interface InterfaceLocaliserComparator {
     double similarity(Fingerprint p1, Fingerprint p2);
 
     /*
-    TODO Comparators I would like to implement:
+    TODO Comparators I would still like to implement:
         - Jaccard index
         - SimRank
         - Sørensen–Dice
         - Hamming Distance
 
-        Implemented algorithms for string comparison: https://github.com/rrice/java-string-similarity/tree/master/src/test/java/net/ricecode/similarity
+        Reference to an implementation of string comparison algorithms: https://github.com/rrice/java-string-similarity/tree/master/src/test/java/net/ricecode/similarity
      */
 }

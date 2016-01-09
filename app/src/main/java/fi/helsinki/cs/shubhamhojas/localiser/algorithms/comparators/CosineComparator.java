@@ -12,8 +12,9 @@ import fi.helsinki.cs.shubhamhojas.localiser.units.Fingerprint;
 public class CosineComparator implements InterfaceLocaliserComparator{
 
     /*
-    COSINE similarity based on this stackoverflow answer
-    http://stackoverflow.com/questions/3622112/vector-space-model-algorithm-in-java-to-get-the-similarity-score-between-two-peo
+    Implementation of a COSINE similarity
+        it follows a stackoverflow answer
+        url{http://stackoverflow.com/questions/3622112/vector-space-model-algorithm-in-java-to-get-the-similarity-score-between-two-peo}
      */
     public double similarity(Fingerprint p1, Fingerprint p2)
     {

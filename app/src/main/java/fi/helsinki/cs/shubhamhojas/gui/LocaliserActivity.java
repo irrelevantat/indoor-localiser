@@ -3,15 +3,18 @@ package fi.helsinki.cs.shubhamhojas.gui;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.ImageView;
 
+import com.qozix.tileview.TileView;
 import com.qozix.tileview.markers.MarkerLayout;
 
 import java.io.IOException;
@@ -121,7 +124,6 @@ public class LocaliserActivity extends MapActivity implements View.OnTouchListen
         tileViews[currentFloor].moveMarker(markers[currentFloor], c.x, c.y);
 
 
-
         if(((new Date().getTime() - lastTimeUserScrolled)/ 1000 % 60) > 5)
         {
             //invalidate menu icon if this is for the first time
@@ -130,10 +132,34 @@ public class LocaliserActivity extends MapActivity implements View.OnTouchListen
                 invalidateOptionsMenu();
                 lastTimeUserScrolled = 0;
             }
-            tileViews[currentFloor].slideToAndCenter(c.x, c.y);
+
+            final TileView reference_tile = tileViews[currentFloor];
+            final Coordinates reference_c = c;
+
+            /*
+                Temporary bug fix for TileView
+                Behaviour: Only during the first slideToAndCenter the centering of TileView did not work correctly.
+                Assumption: -
+                Fix: Do the slide and center only after a small delay. Delay is being produced by a scheduler switch.
+
+             */
+            new AsyncTask<Integer, Integer, Integer>() {
+                @Override
+                protected Integer doInBackground(Integer... params) {
+                    //DO NOTHING
+                    return 0;
+                }
+
+                @Override
+                protected void onPostExecute(Integer integer) {
+                    reference_tile.slideToAndCenter(reference_c.x, reference_c.y);
+                    super.onPostExecute(integer);
+                }
+            }.execute(null, null, null);
+
         }
 
-        System.out.println(c);
+
     }
 
     @Override
@@ -210,7 +236,26 @@ public class LocaliserActivity extends MapActivity implements View.OnTouchListen
                 iv.setTag(poi.second);
                 poiMarkers.add(iv);
 
-                iv.setContentDescription(poi.second.name+String.format(" is %d meters away from you", (int) (POIDatabase.METERS_PER_PIXEL * poi.second.coordinates.distance(lc.getLastCoordinates()))));
+                iv.setAccessibilityDelegate(new View.AccessibilityDelegate() {
+
+                    @Override
+                    public void onInitializeAccessibilityEvent(View host, AccessibilityEvent event) {
+                        super.onInitializeAccessibilityEvent(host,event);
+                    }
+
+                    @Override
+                    public void onInitializeAccessibilityNodeInfo(View host, AccessibilityNodeInfo info) {
+                        super.onInitializeAccessibilityNodeInfo(host,info);
+                    }
+
+                    @Override
+                    public void onPopulateAccessibilityEvent(View host, AccessibilityEvent event) {
+                        super.onPopulateAccessibilityEvent(host, event);
+                        event.setContentDescription(poi.second.name + String.format(" is %d meters away from you", (int) (POIDatabase.METERS_PER_PIXEL * poi.second.coordinates.distance(lc.getLastCoordinates()))));
+
+                    }
+                });
+                iv.setContentDescription(poi.second.name + String.format(" is %d meters away from you", (int) (POIDatabase.METERS_PER_PIXEL * poi.second.coordinates.distance(lc.getLastCoordinates()))));
 
                 tileViews[currentFloor].addMarker(iv, coordinates.x, coordinates.y, -0.5f, -1.0f);
             }

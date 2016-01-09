@@ -80,7 +80,6 @@ public class DesignPathActivity extends MapActivity implements DialogInterface.O
     @Override
     public void onClick(DialogInterface dialog, int which) {
 
-        System.out.println("Received: " + et.getText());
         setFloor(Integer.valueOf(et.getText().toString()).intValue());
 
         HotSpot hotSpot = new HotSpot();

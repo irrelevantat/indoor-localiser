@@ -5,7 +5,10 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--
+        Only enable this for database collection
+        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    -->
 
     <application
         android:allowBackup="true"
@@ -13,9 +16,6 @@
         android:label="Localiser"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:largeHeap="true" >
-        <activity
-            android:name=".gui.RoomActivity" >
-        </activity>
         <activity
             android:name=".gui.LocaliserActivity"
             android:label="Localiser">
@@ -25,7 +25,9 @@
             </intent-filter>
 
         </activity>
-
+        <activity
+            android:name=".gui.RoomActivity" >
+        </activity>
         <activity
             android:name=".gui.DesignPathActivity"
             android:label="DesignPath">
